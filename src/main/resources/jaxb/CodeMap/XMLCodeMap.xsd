@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="MapMatch">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="targetSystem" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SourceCoding" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="targetCode" type="xs:string" use="required"/>
+									<xs:attribute name="targetName" type="xs:string" use="required"/>
+									<xs:attribute name="system" type="xs:string" use="required"/>
+									<xs:attribute name="code" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="targetSystemName" type="xs:string" use="required"/>
+						<xs:attribute name="targetSystemCode" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

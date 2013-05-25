@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+">
+
+    <bean name="ExampleMapResource" class="org.springframework.core.io.UrlResource">
+        <constructor-arg>
+            classpath:ExampleMapFile.xml
+        </constructor-arg>
+    </bean>
+    
+    <bean name="ExampleMapMatch" class="org.socraticgrid.codeconversion.matchers.MapMatch" init-method="initialize">
+        <property name="mapFileResource" ref="ExampleMapResource"/>
+    </bean>
+    
+      
+    <bean name="VUIDRxNorm" class="org.socraticgrid.codeconversion.matchers.VUIDtoRXNormMatcher">
+        <property name="jenaServerURL" value="http://192.168.1.111:3030/data/sparql"/>
+    </bean>
+    
+    <bean name="ExamplePipeline" class="org.socraticgrid.codeconversion.SearchPipeline" init-method="initialize">
+        <property name="name" value="Example"/>
+        <property name="matchChain">
+            <list>
+                <ref bean="ExampleMapMatch"/>
+            </list>
+        </property>
+    </bean>
+    
+</beans>

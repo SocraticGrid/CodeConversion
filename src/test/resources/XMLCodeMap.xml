@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MapMatch>
+<targetSystem targetSystemCode="SNOMED" targetSystemName="snomed">
+<SourceCoding code="" system="" targetCode="1000067986" targetName=""/>
+<SourceCoding code="" system="" targetCode="1000888435"  targetName=""/>
+<SourceCoding code="" system="" targetCode="1000075889" targetName=""/>
+<SourceCoding code="" sourceSystem="" targetCode="1000085643" targetName=""/>
+<SourceCoding code="410.9" system="ICD9" targetCode="XXX1110000" targetName="Acute myocardial infarction"/>
+<SourceCoding code="428.22" system="ICD9" targetCode="XXX2110000" targetName="Chronic Systolic Heart failure"/>
+<SourceCoding code="272.4" system="ICD9" targetCode="XXX3110000" targetName="Hyperlipidemia"/>
+<SourceCoding code="401.9" system="ICD9" targetCode="XXX4110000" targetName="Hypertension"/>
+</targetSystem>
+<targetSystem targetSystemCode="ICD9" targetSystemName="ICD-9">
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+</targetSystem>
+<targetSystem targetSystemCode="RxNorm" targetSystemName="RxNorm">
+<SourceCoding code="4010153" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+<SourceCoding code="" system="" targetCode="" targetName=""/>
+</targetSystem>
+</MapMatch>

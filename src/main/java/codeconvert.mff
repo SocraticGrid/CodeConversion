@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="mff.xsd" version="7" library="codeconvert">
+
+	<implementations>
+            <!--
+		<implementation language="java">
+			<setting name="package" value="org.socraticgrid.codeconversion"/>
+			<setting name="class" value="SearchProcessor"/>
+		</implementation>
+		<implementation language="builtin"> -->
+			<!--<setting name="class" value="XLSX"/>--> <!--
+		</implementation> -->
+		<implementation language="xslt2">
+			<setting name="xsltfilename" value="codeconvert.xslt"/>
+		</implementation>
+	</implementations>
+
+	<group name="code conversion functions">
+ 		<component name="convertCode">
+			<sources>
+				<datapoint name="context," datatype="string"/>
+				<datapoint name="targetSystem," datatype="string"/>
+				<datapoint name="sourceSystem," datatype="string"/>
+				<datapoint name="soureCode," datatype="string"/>
+				<datapoint name="sourceDisplay" datatype="string"/>
+			</sources>
+			<targets>
+				<datapoint name="result" datatype="string"/>
+			</targets>
+			<implementations>
+				<implementation language="xslt2">
+					<function name="sgfx:convertCode" namespace="http://www.socraticgrid.org/codeconvert/xlsx"/>
+				</implementation>
+			</implementations>
+			<description>
+				<short>result = codeConvert( context, targetSystem, sourceSystem, soureCode, sourceDisplay )</short>
+				<long>The result is the code value converted using a context configuration file.</long>
+			</description>
+		</component>
+	</group>
+</mapping>
