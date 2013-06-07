@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.socraticgrid.codeconversion;
 
 import com.google.common.cache.Cache;
@@ -19,11 +16,16 @@ import org.socraticgrid.codeconversion.elements.NullCodeReference;
 import org.socraticgrid.codeconversion.elements.SearchOptions;
 import javax.annotation.PostConstruct;
 
+
+/**
+ * Master Search Processor class that will manage multiple search pipelines.
+ * Also handles caching of results.
+ *
+ * @author Jerry Goodnough
+ */
+
 public class SearchProcessor
 {
-
-
-
     private List<SearchPipeline> pipeLineList;
     private Cache<CodeSearch, List<CodeReference>> searchCache = null;
     private boolean onSearchFailUseOrginal = false;
@@ -31,27 +33,42 @@ public class SearchProcessor
     private int cacheSize = 128;
     private HashMap<String, String> codeTargetMap = new HashMap<String, String>();
 
-
+    /**
+     *
+     */
     public SearchProcessor()
     {
     }
 
+    /**
+     *
+     * @return
+     */
     public List<SearchPipeline> getPipeLineList()
     {
         return this.pipeLineList;
     }
 
+    /**
+     *
+     * @param list
+     */
     public void setPipeLineList(List<SearchPipeline> list)
     {
         this.pipeLineList = list;
     }
-    
-    
+    /**
+     *
+     * @param cacheSize
+     */
     public void setCacheSize(int cacheSize)
     {
         this.cacheSize = cacheSize;
     }
 
+    /**
+     *
+     */
     @PostConstruct
     public void initialize()
     {
@@ -64,6 +81,13 @@ public class SearchProcessor
      return getSerchProcessor().findCode(targetSystem, sourceSystem, sourceCode, sourceText);
 
      }
+     */
+    /**
+     *
+     * @param sourceSystem
+     * @param sourceCode
+     * @param sourceText
+     * @return
      */
     public CodeReference translateCode(String sourceSystem, String sourceCode, String sourceText)
     {
@@ -80,6 +104,14 @@ public class SearchProcessor
         return out;
     }
 
+    /**
+     *
+     * @param targetSystem
+     * @param sourceSystem
+     * @param sourceCode
+     * @param sourceText
+     * @return
+     */
     public CodeReference findCode(String targetSystem, String sourceSystem, String sourceCode, String sourceText)
     {
         CodeReference result;
@@ -103,6 +135,12 @@ public class SearchProcessor
         return result;
     }
 
+    /**
+     *
+     * @param targetSystem
+     * @param sourceText
+     * @return
+     */
     public CodeReference findCodeByText(String targetSystem, String sourceText)
     {
         CodeReference result;
@@ -128,6 +166,13 @@ public class SearchProcessor
     }
 
     ;
+    /**
+     *
+     * @param targetSystem
+     * @param sourceSystem
+     * @param sourceCode
+     * @return
+     */
     public List<CodeReference> findCodes(String targetSystem, String sourceSystem, String sourceCode)
     {
         List<CodeReference> result = new LinkedList<CodeReference>();
@@ -144,6 +189,12 @@ public class SearchProcessor
         return result;
     }
 
+    /**
+     *
+     * @param targetSystem
+     * @param sourceText
+     * @return
+     */
     public List<CodeReference> findCodesByText(String targetSystem, String sourceText)
     {
         List<CodeReference> result = new LinkedList<CodeReference>();
@@ -198,21 +249,46 @@ public class SearchProcessor
         }
     }
 
+    /**
+     * Controls if just the first pipeline to find a match should be consulted.
+     *
+     * @param bool true if all pipelines should be searched for matches
+     */
     public void setSearchAllPipelines(boolean bool)
     {
         this.searchAllPipelines = bool;
     }
 
+    /**
+     * If true all pipelines will be searched for a result, even after on has
+     * found a match
+     *
+     * @return
+     */
     public boolean getSearchAllPipelines()
     {
         return this.searchAllPipelines;
     }
 
+    /**
+     * Determine if the original code value is returned as the result on a
+     * failed search
+     *
+     * @param bool true if the original code value is returned as the result on
+     * a failed search
+     */
     public void setOnSearchFailUseOrginal(boolean bool)
     {
         this.onSearchFailUseOrginal = bool;
     }
 
+    /**
+     * Determine if the original code value is returned as the result on a
+     * failed search
+     *
+     * @return true if the original code value is returned as the result on a
+     * failed search
+     */
     public boolean getOnSearchFailUseOrginal()
     {
         return this.onSearchFailUseOrginal;

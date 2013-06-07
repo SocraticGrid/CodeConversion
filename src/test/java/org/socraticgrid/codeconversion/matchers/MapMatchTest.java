@@ -78,7 +78,8 @@ public class MapMatchTest extends TestCase
         CodeSearch matchCd = new CodeSearch("RxNorm","vuid","1","");
         List<CodeReference> finalOut = new LinkedList<CodeReference>();
         MapMatch instance = new MapMatch();
-        instance.match(matchCd, finalOut);
+
+        boolean b = instance.match(matchCd, finalOut);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }

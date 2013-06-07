@@ -10,6 +10,12 @@ package org.socraticgrid.codeconversion.elements;
  */
 public class NullCodeReference extends CodeReference{
     
+    /**
+     *
+     * @param system
+     * @param code
+     * @param display
+     */
     public NullCodeReference(String system, String code,String display)
     {
         super(system,code,display);
@@ -17,6 +23,12 @@ public class NullCodeReference extends CodeReference{
     
     private static NullCodeReference singleton = new NullCodeReference("","","<Null>");
  
+
+    /**
+     *
+     * @return
+     */
+
     public static NullCodeReference getNullCode()
     {
         return singleton;

@@ -51,7 +51,9 @@ public class SystemPriorityMatchTest extends TestCase
         CodeSearch matchCd = new CodeSearch("1","2","3","4");
         List<CodeReference> out = new LinkedList<CodeReference>();
         SystemPriorityMatch instance = new SystemPriorityMatch();
-        instance.match(matchCd, out);
+
+        boolean b = instance.match(matchCd, out);
+
         // TODO review the generated test code and remove the default call to fail.
        // fail("The test case is a prototype.");
     }

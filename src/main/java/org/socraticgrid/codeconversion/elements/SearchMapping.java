@@ -8,39 +8,56 @@ package org.socraticgrid.codeconversion.elements;
  *
  * @author Jerry Goodnough
  */
-public class SearchMapping {
+public class SearchMapping
+{
 
+    /**
+     *
+     * @param system
+     * @param code
+     */
     public SearchMapping(String system, String code)
     {
-        this.code=code;
-        this.system=system;
+        this.code = code;
+        this.system = system;
     }
+
+    /**
+     *
+     * @param cs
+     */
     public SearchMapping(CodeSearch cs)
     {
-        this.code=cs.getCode();
-        this.system=cs.getSystem();
+        this.code = cs.getCode();
+        this.system = cs.getSystem();
     }
-    
+
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
         final SearchMapping other = (SearchMapping) obj;
-        if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code)) {
+        if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code))
+        {
             return false;
         }
-        if ((this.system == null) ? (other.system != null) : !this.system.equals(other.system)) {
+        if ((this.system == null) ? (other.system != null) : !this.system.equals(other.system))
+        {
             return false;
         }
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 3;
         hash = 97 * hash + (this.code != null ? this.code.hashCode() : 0);
         hash = 97 * hash + (this.system != null ? this.system.hashCode() : 0);
@@ -48,12 +65,11 @@ public class SearchMapping {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "SearchMapping{" + "code=" + code + ", system=" + system + '}';
     }
-
     //Coding
-    
     private String code;
     private String system;
 
@@ -62,7 +78,8 @@ public class SearchMapping {
      *
      * @return the value of system
      */
-    public String getSystem() {
+    public String getSystem()
+    {
         return system;
     }
 
@@ -71,7 +88,8 @@ public class SearchMapping {
      *
      * @param system new value of system
      */
-    public void setSystem(String system) {
+    public void setSystem(String system)
+    {
         this.system = system;
     }
 
@@ -80,7 +98,8 @@ public class SearchMapping {
      *
      * @return the value of code
      */
-    public String getCode() {
+    public String getCode()
+    {
         return code;
     }
 
@@ -89,10 +108,8 @@ public class SearchMapping {
      *
      * @param code new value of code
      */
-    public void setCode(String code) {
+    public void setCode(String code)
+    {
         this.code = code;
     }
-
-
-
 }

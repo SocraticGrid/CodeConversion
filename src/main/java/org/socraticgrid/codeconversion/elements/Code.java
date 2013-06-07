@@ -12,33 +12,53 @@ import javax.xml.bind.annotation.XmlType;
  * @author Jerry Goodnough
  */
 @XmlType
-public class Code {
+public class Code
+{
 
-    public Code() {
+    /**
+     *
+     */
+    public Code()
+    {
         system = "";
         code = "";
         display = "";
 
     }
 
-    public Code(String system, String code) {
+    /**
+     *
+     * @param system
+     * @param code
+     */
+    public Code(String system, String code)
+    {
         this.system = system;
         this.code = code;
         display = "";
     }
 
-    public Code(String system, String code, String display) {
+    /**
+     *
+     * @param system
+     * @param code
+     * @param display
+     */
+    public Code(String system, String code, String display)
+    {
         this.system = system;
         this.code = code;
         this.display = display;
     }
+
     /**
      * Get the value of display
      *
      * @return the value of display
      */
     @XmlElement
-    public String getDisplay() {
+    public String getDisplay()
+    {
         return display;
     }
 
@@ -47,16 +67,29 @@ public class Code {
      *
      * @param display new value of display
      */
-    public void setDisplay(String display) {
+    public void setDisplay(String display)
+    {
         this.display = display;
     }
+    /**
+     *
+     */
     protected String system;
+    /**
+     *
+     */
     protected String code;
+    /**
+     *
+     */
+    /**
+     *
+     */
     protected String display;
 
-
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "code{" + "system=" + system + ", code=" + code + ",display=" + display + '}';
     }
 
@@ -66,40 +99,48 @@ public class Code {
      * @return the value of CodeReference
      */
     @XmlElement(required = true)
-    public String getCode() {
+    public String getCode()
+    {
         return code;
     }
 
     /**
      * Set the value of CodeReference
      *
-     * @param CodeReference new value of CodeReference
+     * @param code
      */
-    public void setCode(String code) {
+    public void setCode(String code)
+    {
         this.code = code;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
             return false;
         }
         //This should be changed for instanceof
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
         final Code other = (Code) obj;
-        if ((this.system == null) ? (other.system != null) : !this.system.equals(other.system)) {
+        if ((this.system == null) ? (other.system != null) : !this.system.equals(other.system))
+        {
             return false;
         }
-        if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code)) {
+        if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code))
+        {
             return false;
         }
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 5;
         hash = 13 * hash + (this.system != null ? this.system.hashCode() : 0);
         hash = 13 * hash + (this.code != null ? this.code.hashCode() : 0);
@@ -112,7 +153,8 @@ public class Code {
      * @return the value of system
      */
     @XmlElement(required = true)
-    public String getSystem() {
+    public String getSystem()
+    {
         return system;
     }
 
@@ -121,7 +163,8 @@ public class Code {
      *
      * @param system new value of system
      */
-    public void setSystem(String system) {
+    public void setSystem(String system)
+    {
         this.system = system;
     }
 }

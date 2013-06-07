@@ -10,10 +10,23 @@ package org.socraticgrid.codeconversion.exceptions;
  */
 public class InitializationException extends Exception
 {
+
+    /**
+     *
+     * @param cause
+     */
+
     public InitializationException(Throwable cause)
     {
          super(cause);
     }
+
+    /**
+     *
+     * @param message
+     * @param cause
+     */
+
     public InitializationException(String message,Throwable cause)
     {
          super(message,cause);

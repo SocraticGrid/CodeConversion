@@ -75,7 +75,9 @@ public class VUIDtoRXNormMatcherTest extends TestCase implements ApplicationCont
         matchCd.setSystem("vuid");
         List<CodeReference> out = new LinkedList<CodeReference>();
         VUIDtoRXNormMatcher instance = (VUIDtoRXNormMatcher)ctx.getBean("VUIDRxNorm");
-        instance.match(matchCd, out);
+
+        boolean b = instance.match(matchCd, out);
+
         assertTrue(out.size() > 0);
         CodeReference fnd = out.get(0);
         assertEquals(fnd.getCode(), "308416");

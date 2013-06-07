@@ -5,7 +5,7 @@
 package org.socraticgrid.codeconversion.matchers;
 
 import java.util.LinkedList;
-import java.util.List;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -54,7 +54,9 @@ public class MatchReducerTest extends TestCase
         out.add(new CodeReference("4","5","6"));
         out.add(new CodeReference("7","8","9"));        
         MatchReducer instance = new MatchReducer();
-        instance.match(matchCd, out);
+
+        boolean b = instance.match(matchCd, out);
+
         assertTrue(out.size()==1);
     }
 }

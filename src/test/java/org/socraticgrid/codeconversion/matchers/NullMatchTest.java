@@ -51,7 +51,9 @@ public class NullMatchTest extends TestCase
         CodeSearch matchCd = new CodeSearch("1","2","3","4");
         List<CodeReference> out = new LinkedList<CodeReference>();
         NullMatch instance = new NullMatch();
-        instance.match(matchCd, out);
+
+        boolean b = instance.match(matchCd, out);
+
         // TODO review the generated test code and remove the default call to fail.
     }
 }

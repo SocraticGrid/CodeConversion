@@ -16,7 +16,15 @@ public class MatchReducer extends BaseMatcher
 {
    
 
-    public void match(CodeSearch matchCd,List<CodeReference> out)
+
+     /*
+     *
+     * @param matchCd
+     * @param out
+     * @return  
+     */
+    
+    public boolean match(CodeSearch matchCd, List<CodeReference> out)
     {
         if (!out.isEmpty())
         {
@@ -24,6 +32,9 @@ public class MatchReducer extends BaseMatcher
             out.clear();
             out.add(cr);
         }
+
+        return true;
+
     }
  
 

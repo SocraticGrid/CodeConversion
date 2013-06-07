@@ -31,6 +31,12 @@ public class CodeSearch extends Code{
      *
      * @return the value of targetSystem
      */
+
+    /**
+     *
+     * @return
+     */
+
     public String getTargetSystem() {
         return targetSystem;
     }
@@ -45,18 +51,37 @@ public class CodeSearch extends Code{
     }
 
     
+
+    /**
+     *
+     */
+
     public CodeSearch()
     {
         super();
         searchType=SearchOptions.LITERAL_Code+SearchOptions.ANY_Display+SearchOptions.LITERAL_TargetSystem;
     }
-    
+   
+    /**
+     *
+     * @param system
+     * @param code
+     */
+
     public CodeSearch(String system, String code) {
      
         super(system,code);
         searchType=SearchOptions.LITERAL_Code+SearchOptions.ANY_Display+SearchOptions.LITERAL_TargetSystem;
 
     }
+
+    /**
+     *
+     * @param system
+     * @param code
+     * @param searchType
+     */
+
     public CodeSearch(String system, String code,int searchType) {
      
         super(system,code);
@@ -65,24 +90,58 @@ public class CodeSearch extends Code{
     }
 
 
+
+    /**
+     *
+     * @param system
+     * @param code
+     * @param display
+     */
+
     public CodeSearch(String system, String code, String display) {
         super(system,code,display);
         searchType=SearchOptions.LITERAL_Code+SearchOptions.ANY_Display+SearchOptions.LITERAL_TargetSystem;
     }
 
 
+    /**
+     *
+     * @param system
+     * @param code
+     * @param display
+     * @param searchType
+     */
+
     public CodeSearch(String system, String code, String display, int searchType) {
         super(system,code,display);
         this.searchType=searchType;
     }
     
+
+    /**
+     *
+     * @param system
+     * @param code
+     * @param display
+     * @param targetSystem
+     */
+
     public CodeSearch(String system, String code, String display, String targetSystem) {
         super(system,code,display);
         this.targetSystem=targetSystem;
         searchType=SearchOptions.LITERAL_Code+SearchOptions.ANY_Display+SearchOptions.LITERAL_TargetSystem;
     }
     
-     public CodeSearch(String system, String code, String display, String targetSystem, int searchType) {
+     /**
+     *
+     * @param system
+     * @param code
+     * @param display
+     * @param targetSystem
+     * @param searchType
+     */
+    public CodeSearch(String system, String code, String display, String targetSystem, int searchType) {
+
         super(system,code,display);
         this.targetSystem=targetSystem;
         this.searchType=searchType;
@@ -101,10 +160,19 @@ public class CodeSearch extends Code{
      *                 --------------------------------
      * 
      */
+
+    /**
+     *
+     * @return
+     */
     public int getSearchType()
     {
         return searchType;
     }
+    /**
+     *
+     * @param searchType
+     */
     public void setSearchType(int searchType)
     {
         this.searchType=searchType;

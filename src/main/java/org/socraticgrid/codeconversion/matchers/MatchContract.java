@@ -8,25 +8,34 @@ import java.util.HashSet;
 
 /**
  * Abstraction of of the Matching provided by the mapper;
+ *
  * @author Jerry Goodnough
  */
 public class MatchContract
 {
-    
+
     private boolean matchAny;
+    /**
+     *
+     */
     protected HashSet<String> systems = new HashSet<String>();
+
     /**
      * Get the value of matchAny
      *
      * @return the value of matchAny
      */
-    
     public boolean isReady()
     {
-       
-        return (systems.size()>0)||matchAny||filter;
-    
+
+        return (systems.size() > 0) || matchAny || filter;
+
     }
+
+    /**
+     *
+     * @return
+     */
     public boolean isMatchAny()
     {
         return matchAny;
@@ -62,12 +71,16 @@ public class MatchContract
     {
         this.matchAny = matchAny;
     }
-    
+
+    /**
+     *
+     * @param other
+     */
     public void addMatchContract(MatchContract other)
     {
         if (other.isFilter())
         {
-            matchAny=false;
+            matchAny = false;
             this.systems.removeAll(other.systems);
         }
         else
@@ -76,11 +89,15 @@ public class MatchContract
         }
         if (other.isMatchAny())
         {
-            matchAny=true;
+            matchAny = true;
         }
     }
 
-        
+    /**
+     *
+     * @param system
+     * @return
+     */
     public boolean supportsTargetSystem(String system)
     {
         if (matchAny)
@@ -88,11 +105,15 @@ public class MatchContract
             return true;
         }
         else
-        {   
+        {
             return systems.contains(system);
         }
     }
-    
+
+    /**
+     *
+     * @param system
+     */
     public void addTargetSystem(String system)
     {
         systems.add(system);

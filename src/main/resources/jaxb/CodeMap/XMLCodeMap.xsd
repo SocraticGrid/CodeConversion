@@ -12,6 +12,7 @@
 									<xs:attribute name="targetName" type="xs:string" use="required"/>
 									<xs:attribute name="system" type="xs:string" use="required"/>
 									<xs:attribute name="code" type="xs:string" use="required"/>
+                                                                        <xs:attribute name="sourceNote" type="xs:string" use="optional"/>
 								</xs:complexType>
 							</xs:element>
 						</xs:sequence>
