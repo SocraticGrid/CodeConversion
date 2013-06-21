@@ -38,5 +38,26 @@ public class CodeSource {
         this.sourceNote = sourceNote;
     }
  
+    private double matchStrength;
+
+    /**
+     * Get the value of matchStrength
+     *
+     * @return the value of matchStrength
+     */
+    public double getMatchStrength()
+    {
+        return matchStrength;
+    }
+
+    /**
+     * Set the value of matchStrength
+     *
+     * @param matchStrength new value of matchStrength
+     */
+    public void setMatchStrength(double matchStrength)
+    {
+        this.matchStrength = matchStrength;
+    }
 
 }
