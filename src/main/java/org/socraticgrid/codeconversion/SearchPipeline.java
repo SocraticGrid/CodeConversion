@@ -164,9 +164,11 @@ public class SearchPipeline
     protected void buildMatchContract()
     {
         ListIterator<CodeMatcher> itr = matchChain.listIterator();
+      
         while (itr.hasNext())
         {
-            
+           
+            contract.addMatchContract(itr.next().getMatchContract());
         }
     }
 }
