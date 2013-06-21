@@ -19,6 +19,9 @@ public abstract class BaseMatcher implements CodeMatcher
     /*
      * Base Instance of the Match Contract
      */
+    /**
+     *
+     */
     protected MatchContract contract = new MatchContract();
     /**
      * Returns the Match Contract associated with this instance

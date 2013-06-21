@@ -1,6 +1,6 @@
 /*
  * 
- * Map based matcher - Code Optimized - Does not support a single target system with multiple 
+ * Map based matcher - Description Optimized- Does not support a single target system with multiple 
  * mappings. 
  * 
  */
@@ -17,8 +17,8 @@ import java.util.Map.Entry;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import org.socraticgrid.codeconversion.matchers.xml.MapMatch.TargetSystem;
-import org.socraticgrid.codeconversion.matchers.xml.MapMatch.TargetSystem.SourceCoding;
+import org.socraticgrid.codeconversion.matchers.xml.DescMatch.TargetSystem;
+import org.socraticgrid.codeconversion.matchers.xml.DescMatch.TargetSystem.SourceCoding;
 import org.socraticgrid.codeconversion.elements.CodeReference;
 import org.socraticgrid.codeconversion.elements.CodeSearch;
 import org.socraticgrid.codeconversion.elements.SearchMapping;
@@ -31,7 +31,7 @@ import javax.annotation.PostConstruct;
  *
  * @author Jerry Goodnough
  */
-public class MapMatch extends BaseMatcher
+public class DescMatch extends BaseMatcher
 {
 
     /**
@@ -57,7 +57,7 @@ public class MapMatch extends BaseMatcher
      * @throws IOException
      * @throws InitializationException
      */
-    @PostConstruct
+   //@PostConstruct
     public void initialize() throws IOException, InitializationException
     {
 
@@ -458,6 +458,7 @@ public class MapMatch extends BaseMatcher
     /**
      * Target Literal, Code Any, Display Literal
      * 
+     *  This is the most optimized form of this searcher
       * @param matchCd - The Code to match
      * @return List of Matches
      */
@@ -805,7 +806,7 @@ public class MapMatch extends BaseMatcher
         {
             JAXBContext jaxbContext = JAXBContext.newInstance(org.socraticgrid.codeconversion.matchers.xml.ObjectFactory.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            org.socraticgrid.codeconversion.matchers.xml.MapMatch xmlMap = (org.socraticgrid.codeconversion.matchers.xml.MapMatch) jaxbUnmarshaller.unmarshal(is);
+            org.socraticgrid.codeconversion.matchers.xml.DescMatch xmlMap = (org.socraticgrid.codeconversion.matchers.xml.DescMatch) jaxbUnmarshaller.unmarshal(is);
 
             Iterator<TargetSystem> itr = xmlMap.getTargetSystem().iterator();
             while (itr.hasNext())
@@ -823,7 +824,7 @@ public class MapMatch extends BaseMatcher
                     SourceCoding sc = sItr.next();
 
                     CodeReference cd = new CodeReference(ts.getTargetSystemCode(), sc.getTargetCode(), sc.getTargetName());
-                    SearchMapping sm = new SearchMapping(sc.getSystem(), sc.getCode());
+                    SearchMapping sm = new SearchMapping(sc.getSystem(), sc.getDescription());
                     tsm.SrchMap.put(sm, cd);
                 }
             }

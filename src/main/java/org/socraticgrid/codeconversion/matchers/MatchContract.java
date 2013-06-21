@@ -5,6 +5,7 @@
 package org.socraticgrid.codeconversion.matchers;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Abstraction of of the Matching provided by the mapper;
@@ -117,5 +118,14 @@ public class MatchContract
     public void addTargetSystem(String system)
     {
         systems.add(system);
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public Iterator<String> getSystemsIterator()
+    {
+        return this.systems.iterator();
     }
 }

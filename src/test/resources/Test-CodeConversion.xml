@@ -40,4 +40,24 @@
         </property>
     </bean>
     
+    
+    <bean name="SystemTransformer" class="org.socraticgrid.codeconversion.transformer.CodeSystemTransformer">
+        <property name="convertExistingMatches" value="false"/>
+        <property name="embeddedMatcher" ref="VUIDRxNorm"/>
+        <property name="inBoundSystemMappings">
+            <description></description>
+            <map>
+                <entry key="VAId" value="vuid"/>
+                <entry key="2.16.840.1.113883.6.88" value="RxNorm"/>
+            </map>
+        </property>
+        <property name="outBoundSystemMappings">
+            <description></description>
+            <map>
+                <entry key="rxNorm" value="2.16.840.1.113883.6.88"/>
+                <entry key="RxNorm" value="2.16.840.1.113883.6.88"/>
+                <entry key="PH_RxNorm" value="2.16.840.1.113883.6.88"/>
+            </map>
+        </property>
+    </bean>
 </beans>

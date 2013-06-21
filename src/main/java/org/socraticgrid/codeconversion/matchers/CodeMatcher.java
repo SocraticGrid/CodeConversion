@@ -24,6 +24,10 @@ public interface CodeMatcher
      * 
      * @return The Natch Contract
      */
+    /**
+     *
+     * @return
+     */
     public MatchContract getMatchContract();
 
     /**
