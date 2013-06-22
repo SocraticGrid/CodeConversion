@@ -39,7 +39,7 @@
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. * * END OF TERMS AND CONDITIONS *
  * *************************************************************************************************************
  */
-package org.socraticgrid.codeconversion.transformer;
+package org.socraticgrid.codeconversion.wrappers;
 
 import org.socraticgrid.codeconversion.elements.CodeReference;
 import org.socraticgrid.codeconversion.elements.CodeSearch;
@@ -58,7 +58,7 @@ import java.util.Map;
  *
  * @author  Jerry Goodnough
  */
-public class CodeSystemTransformer implements CodeMatcher
+public class CodeSystemTransformWrapper implements CodeMatcher
 {
     private MatchContract contract;
 

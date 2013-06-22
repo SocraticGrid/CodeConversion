@@ -39,8 +39,9 @@
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. * * END OF TERMS AND CONDITIONS *
  * *************************************************************************************************************
  */
-package org.socraticgrid.codeconversion.transformer;
+package org.socraticgrid.codeconversion.wrapper;
 
+import org.socraticgrid.codeconversion.wrappers.CodeSystemTransformWrapper;
 import java.util.HashMap;
 import static junit.framework.Assert.assertEquals;
 
@@ -81,13 +82,13 @@ import java.util.Map;
 
 @ContextConfiguration(locations = { "classpath:Test-CodeConversion.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class CodeSystemTransformerTest
+public class CodeSystemTransformWrapperTest
 {
     @Autowired
     private ApplicationContext ctx;
 
 
-    public CodeSystemTransformerTest()
+    public CodeSystemTransformWrapperTest()
     {
     }
 
@@ -112,14 +113,14 @@ public class CodeSystemTransformerTest
     }
 
     /**
-     * Test of getEmbeddedMatcher method, of class CodeSystemTransformer.
+     * Test of getEmbeddedMatcher method, of class CodeSystemTransformWrapper.
      */
     @Test
     public void testGetEmbeddedMatcher()
     {
         System.out.println("getEmbeddedMatcher");
 
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
 
         CodeMatcher result = instance.getEmbeddedMatcher();
@@ -128,14 +129,14 @@ public class CodeSystemTransformerTest
     }
 
     /**
-     * Test of getInBoundSystemMappings method, of class CodeSystemTransformer.
+     * Test of getInBoundSystemMappings method, of class CodeSystemTransformWrapper.
      */
     @Test
     public void testGetInBoundSystemMappings()
     {
         System.out.println("getInBoundSystemMappings");
 
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
 
         Map result = instance.getInBoundSystemMappings();
@@ -145,14 +146,14 @@ public class CodeSystemTransformerTest
     }
 
     /**
-     * Test of getMatchContract method, of class CodeSystemTransformer.
+     * Test of getMatchContract method, of class CodeSystemTransformWrapper.
      */
     @Test
     public void testGetMatchContract()
     {
         System.out.println("getMatchContract");
 
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
 
         MatchContract result = instance.getMatchContract();
@@ -162,14 +163,14 @@ public class CodeSystemTransformerTest
     }
 
     /**
-     * Test of getOutBoundSystemMappings method, of class CodeSystemTransformer.
+     * Test of getOutBoundSystemMappings method, of class CodeSystemTransformWrapper.
      */
     @Test
     public void testGetOutBoundSystemMappings()
     {
         System.out.println("getOutBoundSystemMappings");
 
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
 
         Map result = instance.getOutBoundSystemMappings();
@@ -178,14 +179,14 @@ public class CodeSystemTransformerTest
     }
 
     /**
-     * Test of isConvertExistingMatches method, of class CodeSystemTransformer.
+     * Test of isConvertExistingMatches method, of class CodeSystemTransformWrapper.
      */
     @Test
     public void testIsConvertExistingMatches()
     {
         System.out.println("isConvertExistingMatches");
 
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
         boolean expResult = false;
         boolean result = instance.isConvertExistingMatches();
@@ -194,7 +195,7 @@ public class CodeSystemTransformerTest
     }
 
     /**
-     * Test of match method, of class CodeSystemTransformer.
+     * Test of match method, of class CodeSystemTransformWrapper.
      */
     @Test
     public void testMatch()
@@ -204,7 +205,7 @@ public class CodeSystemTransformerTest
 
         List<CodeReference> out = new LinkedList<>();
 
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
         CodeSearch matchCd = new CodeSearch();
         matchCd.setCode("4005766");
@@ -225,7 +226,7 @@ public class CodeSystemTransformerTest
     }
 
     /**
-     * Test of setConvertExistingMatches method, of class CodeSystemTransformer.
+     * Test of setConvertExistingMatches method, of class CodeSystemTransformWrapper.
      */
     @DirtiesContext
     @Test
@@ -234,7 +235,7 @@ public class CodeSystemTransformerTest
         System.out.println("setConvertExistingMatches");
 
         boolean convertExistingMatches = false;
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
         instance.setConvertExistingMatches(convertExistingMatches);
 
@@ -242,7 +243,7 @@ public class CodeSystemTransformerTest
     }
 
     /**
-     * Test of setEmbeddedMatcher method, of class CodeSystemTransformer.
+     * Test of setEmbeddedMatcher method, of class CodeSystemTransformWrapper.
      */
     @DirtiesContext
     @Test
@@ -252,7 +253,7 @@ public class CodeSystemTransformerTest
 
         CodeMatcher embeddedMatcher = (CodeMatcher)ctx.getBean(
                 "VUIDRxNorm");
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
         instance.setEmbeddedMatcher(embeddedMatcher);
 
@@ -260,7 +261,7 @@ public class CodeSystemTransformerTest
     }
 
     /**
-     * Test of setInBoundSystemMappings method, of class CodeSystemTransformer.
+     * Test of setInBoundSystemMappings method, of class CodeSystemTransformWrapper.
      */
     @DirtiesContext
     @Test
@@ -271,14 +272,14 @@ public class CodeSystemTransformerTest
         Map<String, String> inBoundSystemMappings = new HashMap<String, String>();
         inBoundSystemMappings.put("test","Test");
         
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
         instance.setInBoundSystemMappings(inBoundSystemMappings);
 
     }
 
     /**
-     * Test of setOutBoundSystemMappings method, of class CodeSystemTransformer.
+     * Test of setOutBoundSystemMappings method, of class CodeSystemTransformWrapper.
      */
     @DirtiesContext
     @Test
@@ -289,7 +290,7 @@ public class CodeSystemTransformerTest
         Map<String, String> outBoundSystemMappings = new HashMap<String, String>();
         outBoundSystemMappings.put("Test", "test");
         
-        CodeSystemTransformer instance = (CodeSystemTransformer) ctx.getBean(
+        CodeSystemTransformWrapper instance = (CodeSystemTransformWrapper) ctx.getBean(
                 "SystemTransformer");
         instance.setOutBoundSystemMappings(outBoundSystemMappings);
 
