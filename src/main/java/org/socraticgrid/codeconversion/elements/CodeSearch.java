@@ -64,6 +64,19 @@ public class CodeSearch extends Code{
    
     /**
      *
+     * @param other
+     */
+    public CodeSearch(CodeSearch other)
+    {
+       this.code=other.code;
+       this.display=other.display;
+       this.searchType=other.searchType;
+       this.system=other.system;
+       this.targetSystem=other.targetSystem;
+    }
+   
+    /**
+     *
      * @param system
      * @param code
      */

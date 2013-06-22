@@ -29,7 +29,7 @@ public class VUIDtoRXNormMatcher extends BaseMatcher
 
     private String jenaServerURL = "";
     private static String JENA_QUERY = "?query=";
-
+    private final static Logger logger = Logger.getLogger(VUIDtoRXNormMatcher.class.getName());
 
     /**
      *
@@ -133,7 +133,7 @@ public class VUIDtoRXNormMatcher extends BaseMatcher
 
             NodeList nodes = response.getElementsByTagName("literal");
 
-            Logger.getLogger(VUIDtoRXNormMatcher.class.getName()).log(Level.FINE, "{0} nodes found", nodes.getLength());
+            logger.log(Level.FINE, "{0} nodes found", nodes.getLength());
 
             if (nodes.getLength() > 0)
             {
@@ -143,7 +143,7 @@ public class VUIDtoRXNormMatcher extends BaseMatcher
         }
         catch (Exception ex)
         {
-            Logger.getLogger(VUIDtoRXNormMatcher.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         }
 
 

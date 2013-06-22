@@ -40,16 +40,13 @@
  * *************************************************************************************************************
  */
 
-
 package org.socraticgrid.codeconversion.matchers;
 
 import org.socraticgrid.codeconversion.elements.CodeReference;
 import org.socraticgrid.codeconversion.elements.CodeSearch;
-import org.socraticgrid.codeconversion.elements.SearchMapping;
-import org.socraticgrid.codeconversion.elements.SearchOptions;
 import org.socraticgrid.codeconversion.exceptions.InitializationException;
-import org.socraticgrid.codeconversion.matchers.xml.MapMatch.TargetSystem;
-import org.socraticgrid.codeconversion.matchers.xml.MapMatch.TargetSystem.SourceCoding;
+import org.socraticgrid.codeconversion.matchers.xml.DescMatch.TargetSystem;
+import org.socraticgrid.codeconversion.matchers.xml.DescMatch.TargetSystem.SourceCoding;
 
 import org.springframework.core.io.Resource;
 
@@ -58,10 +55,8 @@ import java.io.InputStream;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Map.Entry;
 
 import javax.annotation.PostConstruct;
 
@@ -70,45 +65,25 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 
+// TODO:  Fix code Description/code system issue
+// Map Target System -> Description -> System -> Entry
+
 /**
  * Implement Code Mapping based on a Mapped XML file. This mapper is optimized for 1
- * to 1 target/code replacements Map based matcher - Code Optimized - Does not
- * support a single target system with multiple mappings.
+ * to 1 replacements using the target system and the code description
+ *
+ * <p>Map based matcher - Description Optimized- Does not support a single target
+ * system with multiple mappings.</p>
  *
  * @author  Jerry Goodnough
  */
-public class MapMatch extends BaseMatcher
+public class DescMatch extends BaseMatcher
 {
     private Resource mapFileResource = null;
 
     /** The Internal Map Match. */
     private HashMap<String, TargetSystemCodeMap> tsMap =
         new HashMap<String, TargetSystemCodeMap>();
-
-    /**
-     * Uses a the mactdCh to search for a match in an internal code map load from a
-     * specific resource.
-     *
-     * <p>This implementation acts a switch to specific protected implementation
-     * bases of the exact criteria of the code search.</p>
-     *
-     * <p>Currently unsupported search type will cause this method to throw a
-     * UnsupportedOperationException.</p>
-     *
-     * @param   matchCd           The Code to match - No modification is made be this
-     *                            matcher to this object.
-     * @param   matchingCodeList  The List of code that are matched so far. The
-     *                            caller is required to provide this list and this
-     *                            match may added results to it.d
-     *
-     * @return  always returns true to allow match processing to continue.
-     */
-    public boolean match(CodeSearch matchCd, List<CodeReference> matchingCodeList)
-    {
-        return this.vectorMatch(matchCd, matchingCodeList);
-
-    }
-
 
     /**
      * The Spring resource that holds the Match Map XML file.
@@ -143,7 +118,7 @@ public class MapMatch extends BaseMatcher
 
 
     /**
-     * Initialize the map from the inputstream.
+     * Load the XML Document.
      *
      * @param   is
      *
@@ -158,8 +133,8 @@ public class MapMatch extends BaseMatcher
             JAXBContext jaxbContext = JAXBContext.newInstance(
                     org.socraticgrid.codeconversion.matchers.xml.ObjectFactory.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            org.socraticgrid.codeconversion.matchers.xml.MapMatch xmlMap =
-                (org.socraticgrid.codeconversion.matchers.xml.MapMatch)
+            org.socraticgrid.codeconversion.matchers.xml.DescMatch xmlMap =
+                (org.socraticgrid.codeconversion.matchers.xml.DescMatch)
                 jaxbUnmarshaller.unmarshal(is);
 
             Iterator<TargetSystem> itr = xmlMap.getTargetSystem().iterator();
@@ -180,12 +155,19 @@ public class MapMatch extends BaseMatcher
                 while (sItr.hasNext())
                 {
                     SourceCoding sc = sItr.next();
+                    HashMap<String, SourceCoding> map;
 
-                    CodeReference cd = new CodeReference(ts.getTargetSystemCode(),
-                            sc.getTargetCode(), sc.getTargetName());
-                    SearchMapping sm = new SearchMapping(sc.getSystem(),
-                            sc.getCode());
-                    tsm.SrchMap.put(sm, cd);
+                    if (tsm.SrchMap.containsKey(sc.getSourceName()))
+                    {
+                        map = tsm.SrchMap.get(sc.getSourceName());
+                    }
+                    else
+                    {
+                        map = new HashMap<>();
+                        tsm.SrchMap.put(sc.getSourceName(), map);
+                    }
+
+                    map.put(sc.getSourceSystem(), sc);
                 }
             }
         }
@@ -195,130 +177,103 @@ public class MapMatch extends BaseMatcher
         }
     }
 
-
-    /**
-     * Target Any, Code Literal, Display Any.
-     *
-     * <p>Search all mappings for the requested code.</p>
-     *
-     * @param   matchCd  - The Code to match
-     *
-     * @return  true to continue searching
-     */
     @Override
-    protected boolean match_TA_CL_DA(CodeSearch matchCd, List<CodeReference> outList)
+    protected boolean match_TA_CA_DL(CodeSearch matchCd, List<CodeReference> outList)
     {
-        TargetSystemCodeMap scMap = tsMap.get(matchCd.getTargetSystem());
-        Iterator<Entry<String, TargetSystemCodeMap>> itr = tsMap.entrySet()
-            .iterator();
+        Iterator<String> itr = tsMap.keySet().iterator();
 
         while (itr.hasNext())
         {
-            Entry<String, TargetSystemCodeMap> ent = itr.next();
 
+            TargetSystemCodeMap map = tsMap.get(itr.next());
 
-            scMap = ent.getValue();
-
-            SearchMapping fnd = new SearchMapping(matchCd);
-
-            if (scMap.SrchMap.containsKey(fnd))
-            {
-                outList.add(scMap.SrchMap.get(fnd));
-            }
-        }
-
-        return true;
-    }
-
-
-    /**
-     * Copy all codes mapped for a target system.
-     *
-     * @param   matchCd  - The Code to match
-     *
-     * @return  true to continue searching
-     */
-    @Override
-    protected boolean match_TL_CA_DA(CodeSearch matchCd, List<CodeReference> outList)
-    {
-
-
-        TargetSystemCodeMap scMap = tsMap.get(matchCd.getTargetSystem());
-
-        if (scMap != null)
-        {
-
-            Iterator<Entry<SearchMapping, CodeReference>> itr = scMap.SrchMap
-                .entrySet().iterator();
-
-            while (itr.hasNext())
-            {
-                Entry<SearchMapping, CodeReference> ent = itr.next();
-                outList.add(ent.getValue());
-            }
-
-
-        }
-
-        return true;
-    }
-
-    /**
-     * Target Literal, Code Literal, Display Any Search.
-     *
-     * @param   matchCd  - The Code to match
-     *
-     * @return  true to continue searching
-     */
-
-    @Override
-    protected boolean match_TL_CL_DA(CodeSearch matchCd, List<CodeReference> outList )
-    {
-      
-
-        TargetSystemCodeMap scMap = tsMap.get(matchCd.getTargetSystem());
-
-        if (scMap != null)
-        {
-            SearchMapping fnd = new SearchMapping(matchCd);
-
-            if (scMap.SrchMap.containsKey(fnd))
-            {
-                outList.add(scMap.SrchMap.get(fnd));
-            }
-        }
-
-        return true;
-    }
-
-
-    /**
-     * Target Literal, Class Literal, Display Literal.
-     *
-     * @param   matchCd  - The Code to match
-     *
-     * @return  List of Matches
-     */
-
-
-    @Override
-    protected boolean match_TL_CL_DL(CodeSearch matchCd, List<CodeReference> outList)
-    {
-
-
-        TargetSystemCodeMap scMap = tsMap.get(matchCd.getTargetSystem());
-
-        if (scMap != null)
-        {
-            SearchMapping fnd = new SearchMapping(matchCd);
-
-            if (scMap.SrchMap.containsKey(fnd))
+            if (map != null)
             {
 
-                if (scMap.SrchMap.get(fnd).getDisplay().compareTo(
-                            matchCd.getDisplay()) == 0)
+                if (map.SrchMap.containsKey(matchCd.getDisplay()))
                 {
-                    outList.add(scMap.SrchMap.get(fnd));
+
+                    HashMap<String, SourceCoding> sysMap = map.SrchMap.get(
+                            matchCd.getDisplay());
+
+                    Iterator<String> sysItr = sysMap.keySet().iterator();
+
+                    while (sysItr.hasNext())
+                    {
+                        SourceCoding sc = sysMap.get(sysItr.next());
+
+                        outList.add(new CodeReference(matchCd.getTargetSystem(),
+                                sc.getTargetCode(), sc.getSourceName(),
+                                sc.getSourceNote()));
+
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    protected boolean match_TA_CL_DL(CodeSearch matchCd, List<CodeReference> outList)
+    {
+
+        Iterator<String> itr = tsMap.keySet().iterator();
+
+        while (itr.hasNext())
+        {
+
+            TargetSystemCodeMap map = tsMap.get(itr.next());
+
+            if (map != null)
+            {
+
+                if (map.SrchMap.containsKey(matchCd.getDisplay()))
+                {
+                    HashMap<String, SourceCoding> sysMap = map.SrchMap.get(
+                            matchCd.getDisplay());
+                    SourceCoding sc = sysMap.get(matchCd.getSystem());
+
+                    if (sc != null)
+                    {
+
+                        if (sc.getSourceCode().compareTo(matchCd.getCode()) == 0)
+                        {
+                            outList.add(new CodeReference(matchCd.getTargetSystem(),
+                                    sc.getTargetCode(), sc.getSourceName(),
+                                    sc.getSourceNote()));
+                        }
+                    }
+
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    protected boolean match_TL_CA_DL(CodeSearch matchCd, List<CodeReference> outList)
+    {
+        TargetSystemCodeMap map = tsMap.get(matchCd.getTargetSystem());
+
+        if (map != null)
+        {
+
+            if (map.SrchMap.containsKey(matchCd.getDisplay()))
+            {
+                HashMap<String, SourceCoding> sysMap = map.SrchMap.get(
+                        matchCd.getDisplay());
+
+                Iterator<String> sysItr = sysMap.keySet().iterator();
+
+                while (sysItr.hasNext())
+                {
+                    SourceCoding sc = sysMap.get(sysItr.next());
+
+                    outList.add(new CodeReference(matchCd.getTargetSystem(),
+                            sc.getTargetCode(), sc.getSourceName(),
+                            sc.getSourceNote()));
                 }
             }
         }
@@ -327,13 +282,17 @@ public class MapMatch extends BaseMatcher
     }
 
     /**
-     * Nested Target System Code Map.
+     * Target System Code Map.
      */
     public class TargetSystemCodeMap
     {
 
-        /** DOCUMENT ME! */
-        public HashMap<SearchMapping, CodeReference> SrchMap =
-            new HashMap<SearchMapping, CodeReference>();
+        /** Map by name to code reference. */
+        public HashMap<String, HashMap<String, SourceCoding>> SrchMap;
+
+        public TargetSystemCodeMap()
+        {
+            this.SrchMap = new HashMap<>();
+        }
     }
 }

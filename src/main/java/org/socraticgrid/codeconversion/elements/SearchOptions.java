@@ -54,5 +54,8 @@ public class SearchOptions
      */
     final public static int REGEX_Code = 128;
     
+    /**
+     *
+     */
     final public static int REGEX_TargetSystem = 64;
 }

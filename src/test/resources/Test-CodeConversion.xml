@@ -7,16 +7,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
 ">
+    <context:annotation-config/>
+  
 
-    <bean name="ExampleMapResource" class="org.springframework.core.io.ClassPathResource">
-        <constructor-arg value="XMLCodeMap.xml"/>
-    </bean>
     
     <bean name="ExampleMapMatch" class="org.socraticgrid.codeconversion.matchers.MapMatch" init-method="initialize">
-        <property name="mapFileResource" ref="ExampleMapResource"/>
+        <property name="mapFileResource">
+            <bean class="org.springframework.core.io.ClassPathResource">
+                <constructor-arg value="XMLCodeMap.xml"/>
+            </bean>
+        </property>
     </bean>
     
-      
     <bean name="VUIDRxNorm" class="org.socraticgrid.codeconversion.matchers.VUIDtoRXNormMatcher">
         <property name="jenaServerURL" value="http://192.168.1.111:3030/data/sparql"/>
     </bean>
@@ -34,8 +36,35 @@
         <property name="PipeLineList">
             <list>
                 <ref bean="ExamplePipeline"/>
-        </list>
+            </list>
         </property>
     </bean>
     
+    <bean name="DescMatch" class="org.socraticgrid.codeconversion.matchers.DescMatch">
+        <property name="mapFileResource">
+            <bean class="org.springframework.core.io.ClassPathResource">
+                <constructor-arg value="XMLDescMap.xml"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean name="SystemTransformer" class="org.socraticgrid.codeconversion.wrappers.CodeSystemTransformWrapper">
+        <property name="convertExistingMatches" value="false"/>
+        <property name="embeddedMatcher" ref="VUIDRxNorm"/>
+        <property name="inBoundSystemMappings">
+            <description></description>
+            <map>
+                <entry key="VAId" value="vuid"/>
+                <entry key="2.16.840.1.113883.6.88" value="RxNorm"/>
+            </map>
+        </property>
+        <property name="outBoundSystemMappings">
+            <description></description>
+            <map>
+                <entry key="rxNorm" value="2.16.840.1.113883.6.88"/>
+                <entry key="RxNorm" value="2.16.840.1.113883.6.88"/>
+                <entry key="PH_RxNorm" value="2.16.840.1.113883.6.88"/>
+            </map>
+        </property>
+    </bean>
 </beans>

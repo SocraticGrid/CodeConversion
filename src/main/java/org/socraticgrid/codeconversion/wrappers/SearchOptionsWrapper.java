@@ -1,5 +1,5 @@
 /*-
- *
+ * 
  * *************************************************************************************************************
  *  Copyright (C) 2013 by Cognitive Medical Systems, Inc
  *  (http://www.cognitivemedciine.com) * * Licensed under the Apache License,
@@ -11,7 +11,7 @@
  *  KIND, either express or implied. * See the License for the specific language
  *  governing permissions and limitations under the License. *
  * *************************************************************************************************************
- *
+ * 
  * *************************************************************************************************************
  *  Socratic Grid contains components to which third party terms apply. To comply
  *  with these terms, the following * notice is provided: * * TERMS AND
@@ -39,74 +39,53 @@
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. * * END OF TERMS AND CONDITIONS *
  * *************************************************************************************************************
  */
-package org.socraticgrid.codeconversion.elements;
+package org.socraticgrid.codeconversion.wrappers;
 
-
+import java.util.List;
+import org.socraticgrid.codeconversion.elements.CodeReference;
+import org.socraticgrid.codeconversion.elements.CodeSearch;
+import org.socraticgrid.codeconversion.matchers.CodeMatcher;
+import org.socraticgrid.codeconversion.matchers.MatchContract;
 
 /**
  *
  * @author Jerry Goodnough
  */
-public class CodeReference extends Code {
+public class SearchOptionsWrapper implements CodeMatcher
+{
 
-   
+    private CodeMatcher embeddedMatcher;
 
     /**
+     * Get the value of embeddedMatcher
      *
-     * @param system
-     * @param code
-     * @param display
-     * @param source
+     * @return the value of embeddedMatcher
      */
-
-    public CodeReference(String system, String code, String display, CodeSource source)
+    public CodeMatcher getEmbeddedMatcher()
     {
-        super(system, code, display);
-        this.source=source;
+        return embeddedMatcher;
     }
 
     /**
+     * Set the value of embeddedMatcher
      *
-     * @param system
-     * @param code
-     * @param display
+     * @param embeddedMatcher new value of embeddedMatcher
      */
-
-    public CodeReference(String system, String code, String display)
+    public void setEmbeddedMatcher(CodeMatcher embeddedMatcher)
     {
-        super(system, code, display);
-        this.source=null;
+        this.embeddedMatcher = embeddedMatcher;
     }
-   
-    public CodeReference(String system, String code, String display, String source)
+
+    @Override
+    public MatchContract getMatchContract()
     {
-        super(system, code, display);
-        this.source=new CodeSource(source);
-    }
-    /**
-     *
-     */
-
-    protected CodeSource source;
-
-    /**
-     * Get the value of source
-     *
-     * @return the value of source
-     */
-    public CodeSource getSource() {
-        return source;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * Set the value of source
-     *
-     * @param source new value of source
-     */
-    public void setSource(CodeSource source) {
-        this.source = source;
+    @Override
+    public boolean match(CodeSearch matchCd, List<CodeReference> matchingCodeList)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
-
+    
 }

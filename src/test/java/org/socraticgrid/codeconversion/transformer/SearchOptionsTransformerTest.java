@@ -39,74 +39,118 @@
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. * * END OF TERMS AND CONDITIONS *
  * *************************************************************************************************************
  */
-package org.socraticgrid.codeconversion.elements;
+package org.socraticgrid.codeconversion.transformer;
 
+import org.junit.After;
+import org.junit.AfterClass;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import org.socraticgrid.codeconversion.elements.CodeReference;
+import org.socraticgrid.codeconversion.elements.CodeSearch;
+import org.socraticgrid.codeconversion.matchers.MatchContract;
+
+import java.util.List;
 
 
 /**
+ * DOCUMENT ME!
  *
- * @author Jerry Goodnough
+ * @author  Jerry Goodnough
  */
-public class CodeReference extends Code {
+public class SearchOptionsTransformerTest
+{
 
-   
-
-    /**
-     *
-     * @param system
-     * @param code
-     * @param display
-     * @param source
-     */
-
-    public CodeReference(String system, String code, String display, CodeSource source)
+    public SearchOptionsTransformerTest()
     {
-        super(system, code, display);
-        this.source=source;
     }
 
-    /**
-     *
-     * @param system
-     * @param code
-     * @param display
-     */
-
-    public CodeReference(String system, String code, String display)
+    @BeforeClass
+    public static void setUpClass()
     {
-        super(system, code, display);
-        this.source=null;
     }
-   
-    public CodeReference(String system, String code, String display, String source)
+
+    @AfterClass
+    public static void tearDownClass()
     {
-        super(system, code, display);
-        this.source=new CodeSource(source);
     }
-    /**
-     *
-     */
 
-    protected CodeSource source;
+    @Before
+    public void setUp()
+    {
+    }
 
-    /**
-     * Get the value of source
-     *
-     * @return the value of source
-     */
-    public CodeSource getSource() {
-        return source;
+    @After
+    public void tearDown()
+    {
     }
 
     /**
-     * Set the value of source
-     *
-     * @param source new value of source
+     * Test of getMatchContract method, of class SearchOptionsTransformer.
      */
-    public void setSource(CodeSource source) {
-        this.source = source;
+    @Test
+    public void testGetMatchContract()
+    {
+        System.out.println("getMatchContract");
+
+        SearchOptionsTransformer instance = new SearchOptionsTransformer();
+        MatchContract result = instance.getMatchContract();
+        assertNotNull(result);
+
     }
 
+    /**
+     * Test of getSearchOptions method, of class SearchOptionsTransformer.
+     */
+    @Test
+    public void testGetSearchOptions()
+    {
+        System.out.println("getSearchOptions");
 
+        SearchOptionsTransformer instance = new SearchOptionsTransformer();
+        int expResult = 0;
+        int result = instance.getSearchOptions();
+        assertEquals(expResult, result);
 
+    }
+
+    /**
+     * Test of match method, of class SearchOptionsTransformer.
+     */
+    @Test
+    public void testMatch()
+    {
+        System.out.println("match");
+
+        CodeSearch matchCd = new CodeSearch();
+        matchCd.setSearchType(10);
+
+        List<CodeReference> matchingCodeList = null;
+        SearchOptionsTransformer instance = new SearchOptionsTransformer();
+        instance.setSearchOptions(20);
+
+        boolean expResult = true;
+        boolean result = instance.match(matchCd, matchingCodeList);
+        assertEquals(expResult, result);
+        assertTrue(matchCd.getSearchType() == 20);
+
+    }
+
+    /**
+     * Test of setSearchOptions method, of class SearchOptionsTransformer.
+     */
+    @Test
+    public void testSetSearchOptions()
+    {
+        System.out.println("setSearchOptions");
+
+        int searchOptions = 30;
+        SearchOptionsTransformer instance = new SearchOptionsTransformer();
+        instance.setSearchOptions(searchOptions);
+
+    }
 }

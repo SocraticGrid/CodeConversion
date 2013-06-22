@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (x64) (http://www.altova.com) by Emory Fry (Naval Health Research Center) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="DescMatch">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="targetSystem" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SourceCoding" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="targetCode" type="xs:string" use="required"/>
+									<xs:attribute name="targetName" type="xs:string" use="required"/>
+									<xs:attribute name="sourceSystem" type="xs:string" use="required"/>
+									<xs:attribute name="sourceCode" type="xs:string" use="required"/>
+									<xs:attribute name="sourceName" type="xs:string" use="required"/>
+									<xs:attribute name="sourceNote" type="xs:string" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="targetSystemName" type="xs:string" use="required"/>
+						<xs:attribute name="targetSystemCode" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

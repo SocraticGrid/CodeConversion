@@ -39,74 +39,67 @@
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. * * END OF TERMS AND CONDITIONS *
  * *************************************************************************************************************
  */
-package org.socraticgrid.codeconversion.elements;
+package org.socraticgrid.codeconversion.transformer;
 
+import org.socraticgrid.codeconversion.elements.CodeReference;
+import org.socraticgrid.codeconversion.elements.CodeSearch;
+import org.socraticgrid.codeconversion.matchers.CodeMatcher;
+import org.socraticgrid.codeconversion.matchers.MatchContract;
+
+import java.util.List;
 
 
 /**
+ * The Matcher allows the search options to be changed or established in a pipeline
+ * In Spring bean configuration the value might look like value="#{
+ * T(org.socraticgrid.codeconversion.elements.SearchOptions).LITERAL_TargetSystem +
+ * T(org.socraticgrid.codeconversion.elements.SearchOptions).LITERAL_CodeSystem +
+ * T(org.socraticgrid.codeconversion.elements.SearchOptions).ANY_Display }"
  *
- * @author Jerry Goodnough
+ * @author  Jerry Goodnough
  */
-public class CodeReference extends Code {
+public class SearchOptionsTransformer implements CodeMatcher
+{
+    MatchContract contract;
+    private int searchOptions;
 
-   
-
-    /**
-     *
-     * @param system
-     * @param code
-     * @param display
-     * @param source
-     */
-
-    public CodeReference(String system, String code, String display, CodeSource source)
+    SearchOptionsTransformer()
     {
-        super(system, code, display);
-        this.source=source;
+        contract = new MatchContract();
     }
 
-    /**
-     *
-     * @param system
-     * @param code
-     * @param display
-     */
-
-    public CodeReference(String system, String code, String display)
+    @Override
+    public MatchContract getMatchContract()
     {
-        super(system, code, display);
-        this.source=null;
+        return contract;
     }
-   
-    public CodeReference(String system, String code, String display, String source)
+
+    /**
+     * Get the value of searchOptions.
+     *
+     * @return  the value of searchOptions
+     */
+    public int getSearchOptions()
     {
-        super(system, code, display);
-        this.source=new CodeSource(source);
+        return searchOptions;
     }
-    /**
-     *
-     */
 
-    protected CodeSource source;
+    @Override
+    public boolean match(CodeSearch matchCd, List<CodeReference> matchingCodeList)
+    {
+        matchCd.setSearchType(searchOptions);
 
-    /**
-     * Get the value of source
-     *
-     * @return the value of source
-     */
-    public CodeSource getSource() {
-        return source;
+        return true;
     }
 
     /**
-     * Set the value of source
+     * Set the value of searchOptions.
      *
-     * @param source new value of source
+     * @param  searchOptions  new value of searchOptions
      */
-    public void setSource(CodeSource source) {
-        this.source = source;
+    public void setSearchOptions(int searchOptions)
+    {
+        this.searchOptions = searchOptions;
     }
-
-
 
 }
