@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DescMatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../src/main/resources/jaxb/CodeMap/XMLDescMap.xsd">
+	<targetSystem targetSystemName="SNOMED" targetSystemCode="snomed">
+		<SourceCoding sourceName="X" sourceCode="" sourceSystem="Z" targetCode="1000067986" targetName=""/>
+		<SourceCoding sourceName="X" sourceCode="" sourceSystem="Z" targetCode="1000888435" targetName=""/>
+		<SourceCoding sourceName="X" sourceCode="" sourceSystem="Z" targetCode="1000075889" targetName=""/>
+		<SourceCoding sourceName="X" sourceCode="" sourceSystem="Z" targetCode="1000085643" targetName=""/>
+		<SourceCoding sourceName="Acute myocardial infarction" sourceCode="410.9" sourceSystem="ICD9" targetCode="XXX1110000" targetName="Acute myocardial infarction"/>
+		<SourceCoding sourceName="Chronic Systolic Heart failure" sourceCode="428.22" sourceSystem="ICD9" targetCode="XXX2110000" targetName="Chronic Systolic Heart failure"/>
+		<SourceCoding sourceName="Hyperlipidemia" sourceCode="272.4" sourceSystem="ICD9" targetCode="XXX3110000" targetName="Hyperlipidemia"/>
+		<SourceCoding sourceName="Hypertension" sourceCode="401.9" sourceSystem="ICD9" targetCode="XXX4110000" targetName="Hypertension"/>
+	</targetSystem>
+	<targetSystem targetSystemName="X" targetSystemCode="X">
+		<SourceCoding targetCode="2" targetName="" sourceSystem="X" sourceCode="" sourceName="X"/>
+                <SourceCoding sourceName="Hypertension" sourceCode="401.9" sourceSystem="ICD9" targetCode="XXX4110000" targetName="Hypertension"/>
+	</targetSystem>
+        <targetSystem targetSystemName="VAEdCode" targetSystemCode="X">
+		<SourceCoding sourceName="Sex Ed" targetCode="2" targetName="Sex Ed" sourceSystem="VAEdCode" sourceCode="" />
+                <SourceCoding sourceName="Hygine" sourceCode="10" sourceSystem="VAEdCode" targetCode="3" targetName="Hygine"/>
+	</targetSystem>
+</DescMatch>
