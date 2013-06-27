@@ -56,6 +56,8 @@ import java.util.Map;
  * This class wraps a code matcher with the ability to transforms code system names
  * bi-directionally.
  *
+ * TODO: Consider how Version information might be handled
+ * 
  * @author  Jerry Goodnough
  */
 public class CodeSystemTransformWrapper implements CodeMatcher

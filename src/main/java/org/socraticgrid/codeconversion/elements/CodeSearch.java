@@ -228,7 +228,49 @@ public class CodeSearch extends Code{
         this.searchType=searchType;
     }
     
-  
+      private String codeVersion;
+
+    /**
+     * Get the value of codeVersion
+     *
+     * @return the value of codeVersion
+     */
+    public String getCodeVersion()
+    {
+        return codeVersion;
+    }
+
+    /**
+     * Set the value of codeVersion
+     *
+     * @param codeVersion new value of codeVersion
+     */
+    public void setCodeVersion(String codeVersion)
+    {
+        this.codeVersion = codeVersion;
+    }
+    private String targetCodeVersion;
+
+    /**
+     * Get the value of targetCodeVersion
+     *
+     * @return the value of targetCodeVersion
+     */
+    public String getTargetCodeVersion()
+    {
+        return targetCodeVersion;
+    }
+
+    /**
+     * Set the value of targetCodeVersion
+     *
+     * @param targetCodeVersion new value of targetCodeVersion
+     */
+    public void setTargetCodeVersion(String targetCodeVersion)
+    {
+        this.targetCodeVersion = targetCodeVersion;
+    }
+
     @Override
     public boolean equals(Object obj)
     {
@@ -250,6 +292,14 @@ public class CodeSearch extends Code{
         {
             return false;
         }
+         if ((this.targetCodeVersion == null) ? (other.targetCodeVersion != null) : !this.targetCodeVersion.equals(other.targetCodeVersion))
+        {
+            return false;
+        }
+          if ((this.codeVersion == null) ? (other.codeVersion != null) : !this.codeVersion.equals(other.codeVersion))
+        {
+            return false;
+        }
         return true;
     }
 
@@ -262,6 +312,8 @@ public class CodeSearch extends Code{
         hash = 13 * hash + (this.targetSystem != null ? this.targetSystem.hashCode() : 0);
         hash = 13 * hash + (this.display != null ? this.display.hashCode() : 0);
         hash = 13 * hash + this.searchType;
+        hash = 13 * hash + (this.targetCodeVersion != null ? this.targetCodeVersion.hashCode() : 0);
+        hash = 13 * hash + (this.codeVersion != null ? this.codeVersion.hashCode() : 0);
         return hash;
     }
   
