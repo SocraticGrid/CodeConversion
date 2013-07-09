@@ -90,5 +90,5 @@ public class SearchOptions
     public static final int SIMPLE_CODE_SEARCH = LITERAL_TargetSystem + ANY_Display +
         LITERAL_Code;
     public static final int SIMPLE_DISPLAY_SEARCH = LITERAL_TargetSystem +
-        ANY_Display + LITERAL_Code;
+        LITERAL_Display + ANY_Code;
 }
